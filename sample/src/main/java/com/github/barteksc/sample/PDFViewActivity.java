@@ -57,7 +57,6 @@ public class PDFViewActivity extends AppCompatActivity implements OnPageChangeLi
     private final static int REQUEST_CODE = 42;
     public static final int PERMISSION_CODE = 42042;
 
-    public static final String SAMPLE_FILE = "sample.pdf";
     public static final String READ_EXTERNAL_STORAGE = "android.permission.READ_EXTERNAL_STORAGE";
 
     @ViewById
@@ -105,26 +104,11 @@ public class PDFViewActivity extends AppCompatActivity implements OnPageChangeLi
         pdfView.setBackgroundColor(Color.LTGRAY);
         if (uri != null) {
             displayFromUri(uri);
-        } else {
-            displayFromAsset(SAMPLE_FILE);
         }
         setTitle(pdfFileName);
     }
 
-    private void displayFromAsset(String assetFileName) {
-        pdfFileName = assetFileName;
 
-        pdfView.fromAsset(SAMPLE_FILE)
-                .defaultPage(pageNumber)
-                .onPageChange(this)
-                .enableAnnotationRendering(true)
-                .onLoad(this)
-                .scrollHandle(new DefaultScrollHandle(this))
-                .spacing(10) // in dp
-                .onPageError(this)
-                .pageFitPolicy(FitPolicy.BOTH)
-                .load();
-    }
 
     private void displayFromUri(Uri uri) {
         pdfFileName = getFileName(uri);
